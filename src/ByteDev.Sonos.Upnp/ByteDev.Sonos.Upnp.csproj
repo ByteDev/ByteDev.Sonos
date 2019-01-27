@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Classes to communicate with Sonos devices with UPnP.</Description>
+    <Authors>Paul Stanley</Authors>
+    <Company></Company>
+    <PackageTags>sonos upnp</PackageTags>
+  </PropertyGroup>
+
+</Project>
