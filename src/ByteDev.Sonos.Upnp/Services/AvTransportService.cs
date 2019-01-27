@@ -16,10 +16,7 @@ namespace ByteDev.Sonos.Upnp.Services
         private const string ControlUrl = "/MediaRenderer/AVTransport/Control";
         private const string ActionNamespace = "urn:schemas-upnp-org:service:AVTransport:1";
 
-        private XNamespace ActionXNamespace
-        {
-            get { return ActionNamespace; }
-        }
+        private static XNamespace ActionXNamespace => ActionNamespace;
 
         public AvTransportService(string ipAddress)
         {
@@ -76,16 +73,27 @@ namespace ByteDev.Sonos.Upnp.Services
                 new UpnpArgument("ObjectID", queueItemId.ObjectId)
             });
         }
-        
-        public async Task AddTrackToQueueAsync(string enqueuedUri, string enqueuedUriMetaData,  EnqueueAsNextType next) 
+
+        public async Task<AddUriToQueueResponse> AddTrackToQueueAsync(string enqueuedUri, int desiredFirstTrackNumberEnqueued = 0, bool enqueueAsNext = false) 
         {
+            if(desiredFirstTrackNumberEnqueued < 0)
+                throw new ArgumentException("DesiredFirstTrackNumberEnqueued must either be zero (place at end of queue) or one or more (position in queue).", nameof(desiredFirstTrackNumberEnqueued));
+
+            // enqueueAsNext = Whether this URI should be played as the next track in shuffle mode. This only works if PlayMode = SHUFFLE
+
+            var enqueuedUriMetaData = "";
+
+
+
             var xml = await _upnpClient.InvokeFuncWithResultAsync("AddURIToQueue", new List<UpnpArgument>
             {
                 new UpnpArgument("EnqueuedURI", enqueuedUri),
                 new UpnpArgument("EnqueuedURIMetaData", enqueuedUriMetaData),
-                new UpnpArgument("DesiredFirstTrackNumberEnqueued", "0"),
-                new UpnpArgument("EnqueueAsNext", (int)next)
+                new UpnpArgument("DesiredFirstTrackNumberEnqueued", desiredFirstTrackNumberEnqueued),
+                new UpnpArgument("EnqueueAsNext", enqueueAsNext.ToInt())
             });
+
+            return new AddUriToQueueResponseFactory().CreateFor(ActionXNamespace, xml);
         }
 
         public async Task AddSpotifyTrackToQueueAsync(string spotifyId)
@@ -100,12 +108,13 @@ namespace ByteDev.Sonos.Upnp.Services
                                "<dc:title></dc:title>" +
                                $"<upnp:class>{ItemClass.MusicTrack}</upnp:class>" +
                                "<desc id=\"cdudn\" nameSpace=\"urn:schemas-rinconnetworks-com:metadata-1-0/\">SA_RINCON2311_X_#Svc2311-0-Token</desc>" +
-                           "</item>" +
+                            "</item>" +
                            "</DIDL-Lite>";
 
             metadata = HttpUtility.HtmlEncode(metadata);
 
-            await AddTrackToQueueAsync(uri, metadata, EnqueueAsNextType.AddToEndOfQueue);
+            //await AddTrackToQueueAsync(uri, metadata);
+            await AddTrackToQueueAsync(uri);
         }
 
         public async Task SetPlayModeAsync(PlayMode playMode)

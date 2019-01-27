@@ -14,13 +14,9 @@ namespace ByteDev.Sonos.Upnp.Services.Factories
 
             var browseResponseElement = xElement.Descendants(XName.Get("BrowseResponse", actionXNamespace)).First();
 
-            int numberReturned;
-            int totalMatches;
-            int updateId;
-
-            int.TryParse(browseResponseElement.Element("NumberReturned")?.Value, out numberReturned);
-            int.TryParse(browseResponseElement.Element("TotalMatches")?.Value, out totalMatches);
-            int.TryParse(browseResponseElement.Element("UpdateID")?.Value, out updateId);
+            int.TryParse(browseResponseElement.Element("NumberReturned")?.Value, out var numberReturned);
+            int.TryParse(browseResponseElement.Element("TotalMatches")?.Value, out var totalMatches);
+            int.TryParse(browseResponseElement.Element("UpdateID")?.Value, out var updateId);
 
             var didlElement = browseResponseElement.Element("Result")?.Value;
 
@@ -49,8 +45,7 @@ namespace ByteDev.Sonos.Upnp.Services.Factories
         {
             XElement resElement = itemElement.FirstNode as XElement;
 
-            TimeSpan duration;
-            TimeSpan.TryParse(resElement?.GetAttributeValueSafe("duration"), out duration);
+            TimeSpan.TryParse(resElement?.GetAttributeValueSafe("duration"), out var duration);
             
             return new Item // TODO: TrackMetaData is very similar
             {

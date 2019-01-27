@@ -15,8 +15,9 @@ namespace ByteDev.Sonos.Upnp.Services
 
         Task ClearQueueAsync();
         Task RemoveTrackFromQueueAsync(QueueItemId queueItemId);
-        Task AddTrackToQueueAsync(string enqueuedUri, string enqueuedUriMetaData,  EnqueueAsNextType next);
+        Task<AddUriToQueueResponse> AddTrackToQueueAsync(string enqueuedUri, int desiredFirstTrackNumberEnqueued = 0, bool enqueueAsNext = false);
         Task AddSpotifyTrackToQueueAsync(string spotifyId);
+
         Task SetPlayModeAsync(PlayMode playMode);
 
         /// <summary>

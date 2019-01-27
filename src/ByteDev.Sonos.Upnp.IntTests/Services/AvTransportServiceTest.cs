@@ -140,15 +140,33 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
         [TestFixture]
         public class AddTrackToQueueAsync : AvTransportServiceTest
         {
+            private const string TrackOnNas = @"x-file-cifs://hal/Music/Mp3/Archive/Artists/a/Air/Moon%20Safari/02%20-%20Air%20-%20Sexy%20Boy.mp3";
+            
             [Test]
-            public async Task WhenTrackIsOnNas_ThenAddToQueue()
+            public async Task WhenTrackIsOnNas_AndPositionNotSpecified_ThenTrackIsAddedToEndOfQueue()
             {
                 // x-file-cifs://HOSTNAME/sharename/artist/album/01%20-%20Song.mp3
-                var uri = "x-file-cifs://NAS/music/mp3/Air/Moon%20Safari/01%20La%20Femme%20d'argent.mp3";
-                var metaData = "";
 
-                await _sut.AddTrackToQueueAsync(uri, metaData, EnqueueAsNextType.AddToEndOfQueue);
+                // \\hal\Music\Mp3\Archive\Artists\a\Air\Moon Safari\02 - Air - Sexy Boy.mp3
+                //
+                // x-file-cifs://hal/Music/Mp3/Archive/Artists/a/Air/Moon%20Safari/02%20-%20Air%20-%20Sexy%20Boy.mp3
+
+                await _sut.AddTrackToQueueAsync(TrackOnNas);
             }
+
+            [Test]
+            public async Task WhenTrackIsOnNas_AndPositionSpecified_ThenReturnsResponse()
+            {
+                const int queuePosition = 3;
+
+                var result = await _sut.AddTrackToQueueAsync(TrackOnNas, queuePosition, true);
+
+                Assert.That(result.FirstTrackNumberEnqueued, Is.EqualTo(queuePosition));
+                Assert.That(result.NewQueueLength, Is.GreaterThan(0));
+                Assert.That(result.NumTracksAdded, Is.EqualTo(1));
+            }
+
+
 
             [Test]
             public async Task WhenTrackExists_ThenAddToQueue()

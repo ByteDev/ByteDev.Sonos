@@ -9,9 +9,9 @@ namespace ByteDev.Sonos.Upnp.Services.Factories
     {
         public GetMediaInfoResponse CreateFor(XNamespace actionXNamespace, string xml)
         {
-            var element = XElement.Parse(xml);
+            var xElement = XElement.Parse(xml);
 
-            var responseNode = element.Descendants(actionXNamespace + "GetMediaInfoResponse").First();
+            var responseNode = xElement.Descendants(actionXNamespace + "GetMediaInfoResponse").First();
 
             return new GetMediaInfoResponse
             {

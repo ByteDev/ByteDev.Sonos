@@ -9,10 +9,6 @@ namespace ByteDev.Sonos.Upnp
         public string IpAddress { get; }
         public string Path { get; }
 
-        public SonosUri(string ipAddress) : this(ipAddress, string.Empty)
-        {
-        }
-
         public SonosUri(string ipAddress, string path)
         {
             if(string.IsNullOrEmpty(ipAddress))

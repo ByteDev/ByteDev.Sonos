@@ -15,22 +15,22 @@ namespace ByteDev.Sonos.Upnp.UnitTests
             [Test]
             public void WhenIpAddressIsNull_ThenThrowException()
             {
-                Assert.Throws<ArgumentException>(() => new SonosUri(null));
+                Assert.Throws<ArgumentException>(() => new SonosUri(null, ValidPath));
             }
 
             [Test]
             public void WhenIpAddressIsEmpty_ThenThrowException()
             {
-                Assert.Throws<ArgumentException>(() => new SonosUri(string.Empty));
+                Assert.Throws<ArgumentException>(() => new SonosUri(string.Empty, ValidPath));
             }
 
             [Test]
-            public void WhenIpAddressIsValid_ThenSet()
+            public void WhenIpAddressAndPathAreValid_ThenSet()
             {
-                var sut = new SonosUri(ValidIpAddress);
+                var sut = new SonosUri(ValidIpAddress, ValidPath);
 
                 Assert.That(sut.IpAddress, Is.EqualTo(ValidIpAddress));
-                Assert.That(sut.Path, Is.Empty);
+                Assert.That(sut.Path, Is.EqualTo(ValidPath));
             }
 
             [Test]
