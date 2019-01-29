@@ -6,7 +6,7 @@ var nugetSources = new[] {"https://api.nuget.org/v3/index.json"};
 
 var target = Argument("target", "Default");
 
-var solutionFilePath = "../src/ByteDev.Sonos.sln";
+var solutionFilePath = "../src/ByteDev.Sonos-build.sln";
 
 var artifactsDirectory = Directory("../artifacts");
 var nugetDirectory = artifactsDirectory + Directory("NuGet");
@@ -75,8 +75,8 @@ Task("CreateNuGetPackages")
 			OutputDirectory = nugetDirectory
 		};
                 
-		DotNetCorePack("../src/ByteDev.Sonos/ByteDev.DotNet.csproj", settings);
-		DotNetCorePack("../src/ByteDev.Sonos.Upnp/ByteDev.DotNet.Upnp.csproj", settings);
+		DotNetCorePack("../src/ByteDev.Sonos/ByteDev.Sonos.csproj", settings);
+		DotNetCorePack("../src/ByteDev.Sonos.Upnp/ByteDev.Sonos.Upnp.csproj", settings);
     });
 
    
