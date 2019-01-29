@@ -5,7 +5,7 @@
     <Description>Classes to communicate with Sonos devices.</Description>
     <Authors>Paul Stanley</Authors>
     <Company></Company>
-    <PackageTags>sonos</PackageTags>
+    <PackageTags>sonos upnp music speaker device</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
