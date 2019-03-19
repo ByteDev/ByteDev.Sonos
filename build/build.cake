@@ -1,5 +1,6 @@
 #addin nuget:?package=Cake.Incubator&version=3.0.0
 #tool "nuget:?package=NUnit.Runners&version=2.6.4"
+#tool "nuget:?package=GitVersion.CommandLine"
 #load "ByteDev.Utilities.cake"
 
 var nugetSources = new[] {"https://api.nuget.org/v3/index.json"};
