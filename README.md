@@ -40,6 +40,8 @@ await controller.SetVolumeAsync(volume);
 
 ### SonosDeviceService
 
+SonosDeviceService allows you to get details about a particular Sonos device and even restart the device.
+
 ```csharp
 var service = new SonosDeviceService();
 
