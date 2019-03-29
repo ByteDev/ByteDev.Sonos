@@ -7,6 +7,7 @@
         public string HeaderValue => $"\"{ActionNamespace}#{Action}\"";
 
         public string Action { get; }
+
         public string ActionNamespace { get; }
 
         public SoapAction(string action, string actionNamespace)

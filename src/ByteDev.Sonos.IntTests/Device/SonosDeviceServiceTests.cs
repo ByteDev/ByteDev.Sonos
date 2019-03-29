@@ -45,7 +45,7 @@ namespace ByteDev.Sonos.IntTests.Device
                 SonosDevice result = await _sut.GetDeviceAsync(TestSpeaker.IpAddress);
 
                 Assert.That(result.IpAddress, Is.EqualTo(TestSpeaker.IpAddress));
-                Assert.That(result.ModelNumber, Is.EqualTo("S9"));
+                Assert.That(result.ModelNumber, Is.EqualTo("S1"));
             }
 
             [Test]

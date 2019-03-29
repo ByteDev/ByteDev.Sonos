@@ -5,6 +5,7 @@ namespace ByteDev.Sonos.Upnp.Proxy
     public class UpnpArgument
     {
         public string Name { get; }
+
         public object Value { get; }
 
         public UpnpArgument(string name, object value)

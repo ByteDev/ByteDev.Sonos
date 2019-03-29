@@ -7,8 +7,11 @@ namespace ByteDev.Sonos.Upnp.Services.Models
         private IList<Item> _items;
 
         public int NumberReturned { get; set; }
+
         public int TotalMatches { get; set; }
+
         public int UpdateId { get; set; }
+
         public string DidlRaw { get; set; }
 
         public IList<Item> Items

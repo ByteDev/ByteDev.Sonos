@@ -51,10 +51,4 @@ namespace ByteDev.Sonos.Upnp.Services.Models
             return Value;
         }
     }
-
-    public enum SeekUnitType
-    {
-        Time,
-        TrackNumber
-    }
 }

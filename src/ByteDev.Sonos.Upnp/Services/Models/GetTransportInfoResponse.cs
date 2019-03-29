@@ -3,7 +3,9 @@
     public class GetTransportInfoResponse
     {
         public TransportState CurrentTransportState { get; set; }
+
         public string CurrentTransportStatus { get; set; }
+
         public string CurrentSpeed { get; set; }
     }
 }

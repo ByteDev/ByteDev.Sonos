@@ -25,5 +25,7 @@ await controller.SetVolumeAsync(volume);
 ```csharp
 var service = new SonosDeviceService();
 
-var httpMessage = await service.RebootAsync("192.168.1.100");
+var sonosDevice = await service.GetDeviceAsync("192.168.1.100");
+
+var httpResponseMessage = await service.RebootAsync("192.168.1.100");
 ```

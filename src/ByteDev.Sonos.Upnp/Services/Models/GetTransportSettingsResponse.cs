@@ -3,6 +3,7 @@
     public class GetTransportSettingsResponse
     {
         public string PlayMode { get; set; }
+
         public string RecQualityMode { get; set; }
     }
 }
