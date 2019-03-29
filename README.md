@@ -1,3 +1,5 @@
+[![NuGet Package](https://img.shields.io/nuget/v/ByteDev.Sonos.svg)](https://www.nuget.org/packages/ByteDev.Sonos)
+
 # ByteDev.Sonos
 
 Set of classes and tools to help control Sonos devices.
