@@ -69,13 +69,6 @@ Task("CreateNuGetPackages")
     {
 		var nugetVersion = GetNuGetVersion();
 
-        //var settings = new DotNetCorePackSettings()
-		//{
-		//	ArgumentCustomization = args => args.Append("/p:Version=" + nugetVersion),
-		//	Configuration = configuration,
-		//	OutputDirectory = nugetDirectory
-		//};
-		
 		var nugetSettings = new NuGetPackSettings 
 		{
 			Version = nugetVersion,
@@ -84,7 +77,6 @@ Task("CreateNuGetPackages")
                 
 		NuGetPack("../src/ByteDev.Sonos.nuspec", nugetSettings);
 		
-		//DotNetCorePack("../src/ByteDev.Sonos/ByteDev.Sonos.csproj", settings);
     });
 
    

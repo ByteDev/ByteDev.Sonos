@@ -7,9 +7,10 @@
     <authors>Paul Stanley</authors>
     <owners>Paul Stanley</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Communicate with Sonos devices in .NET.</description>
+    <description>.NET Standard library to help communicate with Sonos devices.</description>
     <copyright>Copyright 2019</copyright>
     <tags>sonos upnp music speaker device hifi</tags>
+	<iconUrl>https://raw.githubusercontent.com/bytedev/ByteDev.Sonos/master/images/icon.png</iconUrl>
   </metadata>
   <files>
 	<file src="ByteDev.Sonos\bin\Release\netstandard2.0\ByteDev.Sonos.dll" target="lib\netstandard2.0" />
