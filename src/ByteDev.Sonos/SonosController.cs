@@ -117,6 +117,11 @@ namespace ByteDev.Sonos
             await _avTransportService.RemoveTrackFromQueueAsync(new QueueItemId(trackNumber));
         }
 
+        public async Task AddQueueTrackAsync(string trackUri, int desiredFirstTrackNumberEnqueued = 0, bool enqueueAsNext = false)
+        {
+            await _avTransportService.AddTrackToQueueAsync(trackUri, desiredFirstTrackNumberEnqueued, enqueueAsNext);
+        }
+
         #endregion
 
         #region Current Track

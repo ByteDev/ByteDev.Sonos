@@ -16,10 +16,17 @@ namespace ByteDev.Sonos.Upnp.Proxy
             if (args == null)
                 args = new List<UpnpArgument>();
 
-            if (args.All(p => p.Name != "InstanceID"))
-                args.Insert(0, new UpnpArgument("InstanceID", 0));
+            AddInstanceIdArg(args);
 
             Arguments = args;
+        }
+
+        private static void AddInstanceIdArg(IList<UpnpArgument> args)
+        {
+            var instanceId = UpnpArgument.CreateInstanceId();
+
+            if (args.All(p => p.Name != instanceId.Name))
+                args.Insert(0, instanceId);
         }
     }
 }

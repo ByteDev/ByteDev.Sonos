@@ -16,5 +16,10 @@ namespace ByteDev.Sonos.Upnp.Proxy
             Name = name;
             Value = value;
         }
+
+        public static UpnpArgument CreateInstanceId()
+        {
+            return new UpnpArgument("InstanceID", 0);
+        }
     }
 }

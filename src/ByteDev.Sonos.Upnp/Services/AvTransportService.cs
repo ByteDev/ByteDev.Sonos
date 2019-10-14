@@ -80,15 +80,11 @@ namespace ByteDev.Sonos.Upnp.Services
                 throw new ArgumentException("DesiredFirstTrackNumberEnqueued must either be zero (place at end of queue) or one or more (position in queue).", nameof(desiredFirstTrackNumberEnqueued));
 
             // enqueueAsNext = Whether this URI should be played as the next track in shuffle mode. This only works if PlayMode = SHUFFLE
-
-            var enqueuedUriMetaData = "";
-
-
-
+            
             var xml = await _upnpClient.InvokeFuncWithResultAsync("AddURIToQueue", new List<UpnpArgument>
             {
                 new UpnpArgument("EnqueuedURI", enqueuedUri),
-                new UpnpArgument("EnqueuedURIMetaData", enqueuedUriMetaData),
+                new UpnpArgument("EnqueuedURIMetaData", string.Empty),
                 new UpnpArgument("DesiredFirstTrackNumberEnqueued", desiredFirstTrackNumberEnqueued),
                 new UpnpArgument("EnqueueAsNext", enqueueAsNext.ToInt())
             });
