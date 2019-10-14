@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security;
 using System.Text;
 using ByteDev.Sonos.Upnp.Proxy.Soap;
 
@@ -16,13 +17,9 @@ namespace ByteDev.Sonos.Upnp.Proxy
             if(args == null)
                 throw new ArgumentNullException(nameof(args));
 
-            var content = CreateSoapMessage(soapAction, args);
+            string content = CreateSoapMessage(soapAction, args);
 
-            var sc = new StringContent(content);                                       // TODO: create SoapContent?
-            sc.Headers.ContentType = MediaTypeHeaderValue.Parse("text/xml");
-            sc.Headers.Add(SoapAction.HeaderName, soapAction.HeaderValue);
-
-            return sc;
+            return CreateSoapStringContent(soapAction, content);
         }
 
         private static string CreateSoapMessage(SoapAction sa, UpnpArgumentList list)
@@ -40,12 +37,22 @@ namespace ByteDev.Sonos.Upnp.Proxy
 
             foreach (var property in list.Arguments)
             {
-                body.Append($"<{property.Name}>{property.Value}</{property.Name}>");
+                string escapedValue = SecurityElement.Escape(property.Value.ToString());
+
+                body.Append($"<{property.Name}>{escapedValue}</{property.Name}>");
             }
 
             body.Append($"</u:{sa.Action}>");
 
             return body.ToString();
+        }
+
+        private static StringContent CreateSoapStringContent(SoapAction soapAction, string content)
+        {
+            var sc = new StringContent(content);
+            sc.Headers.ContentType = MediaTypeHeaderValue.Parse("text/xml");
+            sc.Headers.Add(SoapAction.HeaderName, soapAction.HeaderValue);
+            return sc;
         }
     }
 }

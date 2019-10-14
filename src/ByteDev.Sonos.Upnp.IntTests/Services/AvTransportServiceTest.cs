@@ -19,14 +19,14 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
         [SetUp]
         public void SetUp()
         {
+            _sut = new AvTransportService(TestSpeaker.IpAddress);
+
             _renderingControlService = new RenderingControlService(TestSpeaker.IpAddress);
             _contentDirectoryService = new ContentDirectoryService(TestSpeaker.IpAddress);
 
-            _sonosController = new SonosController(new AvTransportService(TestSpeaker.IpAddress), 
+            _sonosController = new SonosController(_sut, 
                 _renderingControlService,
                 _contentDirectoryService);
-
-            _sut = new AvTransportService(TestSpeaker.IpAddress);
         }
 
         private async Task AssertIsPlayingAsync()
@@ -43,6 +43,13 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
             var isPlaying = await _sonosController.GetIsPlayingAsync();
 
             Assert.That(isPlaying, Is.False);
+        }
+
+        private async Task AssertPlayModeIsNormalAsync()
+        {
+            var settings = await _sut.GetTransportSettingsAsync();
+
+            Assert.That(new PlayMode(settings.PlayMode).Type, Is.EqualTo(PlayModeType.Normal));
         }
 
         [TestFixture]
@@ -151,7 +158,10 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
                 //
                 // x-file-cifs://hal/Music/Mp3/Archive/Artists/a/Air/Moon%20Safari/02%20-%20Air%20-%20Sexy%20Boy.mp3
 
-                await _sut.AddTrackToQueueAsync(TrackOnNas);
+                var result = await _sut.AddTrackToQueueAsync(TrackOnNas);
+
+                Assert.That(result.NewQueueLength, Is.GreaterThan(0));
+                Assert.That(result.NumTracksAdded, Is.EqualTo(1));
             }
 
             [Test]
@@ -166,7 +176,20 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
                 Assert.That(result.NumTracksAdded, Is.EqualTo(1));
             }
 
+            [Test]
+            public async Task WhenTrackIsFromSirusXmChanel_ThenAddToQueue()
+            {
+                var result = await _sut.AddTrackToQueueAsync("x-sonosapi-hls:r%3athepulse?sid=37&flags=8480&sn=1");
+                
+                Assert.That(result.NewQueueLength, Is.GreaterThan(0));
+                Assert.That(result.NumTracksAdded, Is.EqualTo(1));
+            }
 
+            [Test]
+            public async Task WhenTrackIsFrom7Digital_ThenAddToQueue()
+            {
+                var result = await _sut.AddTrackToQueueAsync("x-rincon-queue:RINCON_000E58C9FCE001400");
+            }
 
             [Test]
             public async Task WhenTrackExists_ThenAddToQueue()
@@ -212,9 +235,9 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
             [Test]
             public async Task WhenSpeakerExists_ThenReturnInfo()
             {
-                var classUnderTest = new AvTransportService(TestSpeaker.IpAddress);
+                var sut = new AvTransportService(TestSpeaker.IpAddress);
 
-                var result = await classUnderTest.GetMediaInfoAsync();
+                GetMediaInfoResponse result = await sut.GetMediaInfoAsync();
 
                 Assert.That(result, Is.Not.Null);
             }
@@ -226,9 +249,9 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
             [Test]
             public async Task WhenSpeakerExists_ThenReturnInfo()
             {
-                var classUnderTest = new AvTransportService(TestSpeaker.IpAddress);
+                var sut = new AvTransportService(TestSpeaker.IpAddress);
 
-                var result = await classUnderTest.GetTransportInfoAsync();
+                var result = await sut.GetTransportInfoAsync();
                 
                 Assert.That(result.CurrentSpeed, Is.EqualTo("1"));
             }
@@ -240,9 +263,9 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
             [Test]
             public async Task WhenSpeakerExists_ThenReturnInfo()
             {
-                var classUnderTest = new AvTransportService(TestSpeaker.IpAddress);
+                var sut = new AvTransportService(TestSpeaker.IpAddress);
 
-                var result = await classUnderTest.GetPositionInfoAsync();
+                var result = await sut.GetPositionInfoAsync();
 
                 Assert.That(result, Is.Not.Null);
             }
@@ -254,9 +277,7 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
             [Test]
             public async Task WhenSpeakerExists_ThenReturnInfo()
             {
-                var classUnderTest = new AvTransportService(TestSpeaker.IpAddress);
-
-                var result = await classUnderTest.GetTransportSettingsAsync();
+                var result = await _sut.GetTransportSettingsAsync();
 
                 Assert.That(result, Is.Not.Null);
             }
@@ -269,6 +290,8 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
             public async Task WhenSpeakerExists_ThenSetMode()
             {
                 await _sut.SetPlayModeAsync(new PlayMode(PlayModeType.Normal));
+
+                await AssertPlayModeIsNormalAsync();
             }
         }
     }

@@ -15,6 +15,7 @@ namespace ByteDev.Sonos.Upnp.Services.Models
         {
             if(instanceNumber < FirstInstanceNumber)
                 throw new ArgumentOutOfRangeException(nameof(trackNumber), "Instance number cannot be less than zero.");
+
             if (trackNumber < FirstTrackNumber)
                 throw new ArgumentOutOfRangeException(nameof(trackNumber), $"Track number cannot be less than {FirstTrackNumber}.");
 
