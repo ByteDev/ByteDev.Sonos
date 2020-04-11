@@ -32,6 +32,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{74F79266-38F8-4419-9AC7-53286B86C948}"
 	ProjectSection(SolutionItems) = preProject
 		..\build\build.cake = ..\build\build.cake
+		ByteDev.Sonos.nuspec = ByteDev.Sonos.nuspec
 		..\build\ByteDev.Utilities.cake = ..\build\ByteDev.Utilities.cake
 	EndProjectSection
 EndProject
