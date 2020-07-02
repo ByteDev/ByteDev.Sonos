@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ByteDev.Cmd, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ByteDev.Cmd.1.0.0\lib\netstandard2.0\ByteDev.Cmd.dll</HintPath>
+      <HintPath>..\..\packages\ByteDev.Cmd.4.1.1\lib\netstandard2.0\ByteDev.Cmd.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

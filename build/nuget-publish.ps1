@@ -2,7 +2,7 @@
 
 $nupkgExten = ".nupkg"
 $nupkgFileFolder = "../artifacts/NuGet/"
-$nugetExe = ".\nuget.exe"
+$nugetExe = ".\tools\nuget.exe"
 
 $dir = get-childitem $nupkgFileFolder
 $files = $dir | where {$_.extension -eq $nupkgExten} 
@@ -13,6 +13,7 @@ if($files.Count -eq 0) {
 }
 
 $count = $files.Count
+
 Write-Output "$count $nupkgExten files found:"
 
 foreach($file in $files) {
@@ -31,9 +32,9 @@ foreach($file in $files) {
     & $nugetExe push $filePath $key -Source https://api.nuget.org/v3/index.json
 
     if($LASTEXITCODE -eq 0) {
-        Write-Host "Publish '$filePath' successful." -ForegroundColor Green
+        Write-Output "Publish '$filePath' successful."
     }
     else {
-        Write-Host "Publish '$filePath' unsuccessful." -ForegroundColor Red
+        Write-Output "Publish '$filePath' unsuccessful."
     }
 }

@@ -14,11 +14,11 @@ ByteDev.Sonos is hosted as a package on nuget.org.  To install from the Package 
 
 Further details can be found on the [nuget page](https://www.nuget.org/packages/ByteDev.Sonos/).
 
-## Code
+## Release Notes
 
-The repo can be cloned from git bash:
+Releases follow semantic versioning.
 
-`git clone https://github.com/ByteDev/ByteDev.Sonos`
+Full details of the release notes can be viewed on [GitHub](https://github.com/ByteDev/ByteDev.Sonos/blob/master/docs/RELEASE-NOTES.md).
 
 ## Usage
 
