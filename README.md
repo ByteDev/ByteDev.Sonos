@@ -1,4 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/github/bytedev/ByteDev.Sonos?branch=master&svg=true)](https://ci.appveyor.com/project/bytedev/ByteDev-Sonos/branch/master)
 [![NuGet Package](https://img.shields.io/nuget/v/ByteDev.Sonos.svg)](https://www.nuget.org/packages/ByteDev.Sonos)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/ByteDev/ByteDev.Sonos/blob/master/LICENSE)
 
 # ByteDev.Sonos
 
