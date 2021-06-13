@@ -91,9 +91,7 @@ namespace ByteDev.Sonos.Console
 
         public void SetPlayMode(string value)
         {
-            PlayMode mode = new PlayMode(value); 
-
-            _sonosController.SetPlayModeAsync(mode).Wait(); 
+            _sonosController.SetPlayModeAsync(new PlayMode(value)).Wait(); 
         }
 
         private SonosController CreateSonosController(string ipAddress)
