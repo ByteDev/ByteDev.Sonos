@@ -26,6 +26,7 @@ namespace ByteDev.Sonos.Console
             source.WriteLine("\tplay");
             source.WriteLine("\tstop");
             source.WriteLine("\tstopforever");
+            source.WriteLine("\tsetplaymode <NORMAL REPEAT_ALL REPEAT_ONE SHUFFLE SHUFFLE_NOREPEAT>");
         }
     }
 }
