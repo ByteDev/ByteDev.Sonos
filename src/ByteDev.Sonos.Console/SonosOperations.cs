@@ -91,7 +91,6 @@ namespace ByteDev.Sonos.Console
 
         public void SetPlayMode(string value)
         {
-            //PlayMode mode = new PlayMode(PlayModeType.RepeatOne); 
             PlayMode mode = new PlayMode(value); 
 
             _sonosController.SetPlayModeAsync(mode).Wait(); 
