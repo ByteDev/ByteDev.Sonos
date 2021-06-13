@@ -36,6 +36,8 @@ namespace ByteDev.Sonos.Upnp.Services.Models
                     return PlayModeType.Shuffle;
                 case "SHUFFLE_NOREPEAT":
                     return PlayModeType.ShuffleNoRepeat;
+                case "REPEAT_ONE":
+                    return PlayModeType.RepeatOne;
                 default:
                     throw new ArgumentException($"Value unit: '{value}' is not valid.");
             }
@@ -53,6 +55,8 @@ namespace ByteDev.Sonos.Upnp.Services.Models
                     return "SHUFFLE";
                 case PlayModeType.ShuffleNoRepeat:
                     return "SHUFFLE_NOREPEAT";
+                case PlayModeType.RepeatOne:
+                    return "REPEAT_ONE"; 
                 default:
                     throw new ArgumentException($"{typeof(PlayModeType).Name} type value: {type} is not valid.");
             }
@@ -69,6 +73,7 @@ namespace ByteDev.Sonos.Upnp.Services.Models
         Normal,
         Shuffle,
         ShuffleNoRepeat,
-        RepeatAll
+        RepeatAll,
+        RepeatOne,
     }
 }
