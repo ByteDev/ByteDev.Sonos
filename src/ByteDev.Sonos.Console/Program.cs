@@ -118,6 +118,20 @@ namespace ByteDev.Sonos.Console
                         sonosOperations.StopForever();
                         return;
                     }
+
+                    case "setplaymode":
+                    {
+                        var valueArg = GetValueArg(args, i);
+
+                        if (string.IsNullOrEmpty(valueArg))
+                        {
+                            Output.WriteLine($"{opArg} has no supplied value arg.");
+                            return;
+                        }
+
+                        sonosOperations.SetPlayMode(valueArg); 
+                        return; 
+                    }
                 }
             }
         }
