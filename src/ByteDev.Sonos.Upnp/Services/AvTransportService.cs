@@ -168,10 +168,5 @@ namespace ByteDev.Sonos.Upnp.Services
 
             return new GetTransportSettingsResponseFactory().CreateFor(ActionXNamespace, xml);
         }
-
-        public async Task SetPlayModeAsync()
-        {
-            await _upnpClient.InvokeActionAsync("SetPlayMode");
-        }
     }
 }
