@@ -28,7 +28,7 @@ namespace ByteDev.Sonos.Models
 
         public SonosDevice(string ipAddress)
         {
-            if(string.IsNullOrEmpty(ipAddress))
+            if (string.IsNullOrEmpty(ipAddress))
                 throw new ArgumentException("IP Address cannot be null or empty.", nameof(ipAddress));
 
             IpAddress = ipAddress;

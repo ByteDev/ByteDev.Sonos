@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>ByteDev.Sonos</id>
-    <version>0.0.1</version>
     <title>ByteDev.Sonos</title>
+    <version>0.0.1</version>
     <authors>Paul Stanley</authors>
     <owners>Paul Stanley</owners>
+    <copyright>Copyright 2019</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>.NET Standard library to help communicate with Sonos devices.</description>
-    <copyright>Copyright 2019</copyright>
     <tags>sonos upnp music speaker device hifi</tags>
     <projectUrl>https://github.com/ByteDev/ByteDev.Sonos</projectUrl>
     <icon>images\icon.png</icon>

@@ -74,11 +74,11 @@ namespace ByteDev.Sonos.Upnp.Services
             });
         }
 
-        public async Task SetAvTransportUriAsync(string currentUri, string currentUriMetaData)
-        {
-            // Plays a track from the queue
-            // SetAVTransportURI
-        }
+        // public async Task SetAvTransportUriAsync(string currentUri, string currentUriMetaData)
+        // {
+        //     // Plays a track from the queue
+        //     // SetAVTransportURI
+        // }
 
         public async Task<AddUriToQueueResponse> AddTrackToQueueAsync(string enqueuedUri, int desiredFirstTrackNumberEnqueued = 0, bool enqueueAsNext = false) 
         {

@@ -81,7 +81,7 @@ namespace ByteDev.Sonos
 
         public async Task FadeAsync(SonosVolume targetVolume = null)
         {
-            if(targetVolume == null)
+            if (targetVolume == null)
                 targetVolume = new SonosVolume();
 
             var volume = await GetVolumeAsync();

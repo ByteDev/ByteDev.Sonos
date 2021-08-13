@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{74F79266
 	ProjectSection(SolutionItems) = preProject
 		build\build.cake = build\build.cake
 		build\ByteDev.Sonos.nuspec = build\ByteDev.Sonos.nuspec
+		build\ByteDev.Utilities.cake = build\ByteDev.Utilities.cake
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteDev.Sonos.Upnp.Discovery", "src\ByteDev.Sonos.Upnp.Discovery\ByteDev.Sonos.Upnp.Discovery.csproj", "{3FE905AA-E8A7-4A60-B73F-469887D363EE}"

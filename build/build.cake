@@ -1,6 +1,7 @@
-#addin "nuget:?package=Cake.Incubator&version=5.1.0"
-#tool "nuget:?package=NUnit.ConsoleRunner&version=3.11.1"
-#tool "nuget:?package=GitVersion.CommandLine&version=5.2.4"
+#addin "nuget:?package=Cake.Incubator&version=6.0.0"
+#addin "nuget:?package=Cake.Powershell&version=1.0.1"
+#tool "nuget:?package=NUnit.ConsoleRunner&version=3.12.0"
+#tool "nuget:?package=GitVersion.CommandLine&version=5.6.10"
 #load "ByteDev.Utilities.cake"
 
 var solutionName = "ByteDev.Sonos";
@@ -10,8 +11,6 @@ var projName = "ByteDev.Sonos";
 var solutionFilePath = "../ByteDev.Sonos-build.sln";
 
 var nuspecFilePath = projName + ".nuspec";
-
-var nugetSources = new[] {"https://api.nuget.org/v3/index.json"};
 
 var target = Argument("target", "Default");
 
@@ -38,7 +37,7 @@ Task("Restore")
     {
 		var settings = new NuGetRestoreSettings
 		{
-			Source = nugetSources
+			Source = new[] { "https://api.nuget.org/v3/index.json" }
 		};
 
 		NuGetRestore(solutionFilePath, settings);

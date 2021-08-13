@@ -9,7 +9,9 @@ namespace ByteDev.Sonos.Models
         private const int MaxSeconds = 59;
 
         public int Hours { get; }
+
         public int Minutes { get; }
+
         public int Seconds { get; }
         
         public SonosTimeSpan(TimeSpan timeSpan) : this(timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds)
@@ -20,8 +22,10 @@ namespace ByteDev.Sonos.Models
         {
             if (hours < 0 || hours > MaxHours)
                 throw new ArgumentOutOfRangeException(nameof(hours), $"Hours must be between 0 and {MaxHours}.");
+
             if (minutes < 0 || minutes > MaxMinutes)
                 throw new ArgumentOutOfRangeException(nameof(minutes), $"Minutes must be between 0 and {MaxMinutes}.");
+
             if (seconds < 0 || seconds > MaxSeconds)
                 throw new ArgumentOutOfRangeException(nameof(seconds), $"Seconds must be between 0 and {MaxSeconds}.");
 
