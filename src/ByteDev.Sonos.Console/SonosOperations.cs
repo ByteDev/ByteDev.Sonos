@@ -1,6 +1,7 @@
 using System;
 using ByteDev.Sonos.Models;
 using ByteDev.Sonos.Upnp.Services;
+using ByteDev.Sonos.Upnp.Services.Models;
 
 namespace ByteDev.Sonos.Console
 {
@@ -86,6 +87,11 @@ namespace ByteDev.Sonos.Console
                 }
                 System.Threading.Thread.Sleep(DefaultInterval);
             }
+        }
+
+        public void SetPlayMode(string value)
+        {
+            _sonosController.SetPlayModeAsync(new PlayMode(value)).Wait(); 
         }
 
         private SonosController CreateSonosController(string ipAddress)

@@ -95,7 +95,12 @@ namespace ByteDev.Sonos
                     Thread.Sleep(500);
             }
         }
-        
+
+        public async Task SetPlayModeAsync(PlayMode mode)
+        {
+            await _avTransportService.SetPlayModeAsync(mode); 
+        }
+
         #endregion
 
         #region Queue
