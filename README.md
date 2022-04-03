@@ -51,3 +51,7 @@ var sonosDevice = await service.GetDeviceAsync("192.168.1.100");
 
 var httpResponseMessage = await service.RebootAsync("192.168.1.100");
 ```
+
+### Sonos API Documentation
+
+https://svrooij.io/sonos-api-docs/

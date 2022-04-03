@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -231,6 +232,24 @@ namespace ByteDev.Sonos.Ui
                 PrintOutput($"Rebooting {ipAddressTextBox.Text}...");
                 await sonosDeviceService.RebootAsync(ipAddressTextBox.Text);
             }
+        }
+
+        private async void getGroupsButton_Click(object sender, EventArgs e)
+        {
+            var controller = _sonosControllerFactory.Create(ipAddressTextBox.Text);
+            var zoneGroupState = await controller.GetGroupsAsync();
+
+            ResetOutput();
+
+            foreach (var zoneGroup in zoneGroupState.ZoneGroups.Items)
+            {
+                var name = zoneGroup.ZoneGroupMembers.FirstOrDefault().ZoneName;
+                var members = string.Join(", ", zoneGroup.ZoneGroupMembers.Select(m => m.UUID));
+
+                PrintOutput($"{name} (Coordinator is {zoneGroup.Id}) - {zoneGroup.ZoneGroupMembers.Length} members [{members}]");
+            }
+
+            PrintOutput($"{zoneGroupState.ZoneGroups.Items.Length} groups.");
         }
 
         private void PrintOutput(SonosDevice device)
