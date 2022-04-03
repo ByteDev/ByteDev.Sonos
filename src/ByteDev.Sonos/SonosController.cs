@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿
+using System.Threading;
 using System.Threading.Tasks;
 using ByteDev.Sonos.Models;
 using ByteDev.Sonos.Upnp.Services;
@@ -11,14 +12,16 @@ namespace ByteDev.Sonos
         private readonly IAvTransportService _avTransportService;
         private readonly IRenderingControlService _renderingControlService;
         private readonly IContentDirectoryService _contentDirectoryService;
+        private readonly ZoneGroupTopologyService _zoneGroupTopologyService;
 
         public SonosController(IAvTransportService avTransportService,
             IRenderingControlService renderingControlService,
-            IContentDirectoryService contentDirectoryService)
+            IContentDirectoryService contentDirectoryService, ZoneGroupTopologyService zoneGroupTopologyService)
         {
             _avTransportService = avTransportService;
             _renderingControlService = renderingControlService;
             _contentDirectoryService = contentDirectoryService;
+            _zoneGroupTopologyService = zoneGroupTopologyService;
         }
 
         #region Speaker
@@ -174,6 +177,15 @@ namespace ByteDev.Sonos
         public async Task SeekTrackAsync(SonosTrackNumber trackNumber)
         {
             await _avTransportService.SeekAsync(new SeekUnit(SeekUnitType.TrackNumber), trackNumber.ToString());
+        }
+
+        #endregion
+
+        #region Groups
+
+        public async Task<ZoneGroupState> GetGroupsAsync()
+        {
+            return await _zoneGroupTopologyService.GetZoneGroupStateAsync();
         }
 
         #endregion

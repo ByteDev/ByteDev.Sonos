@@ -98,7 +98,8 @@ namespace ByteDev.Sonos.Console
         {
             return new SonosController(new AvTransportService(ipAddress),
                 new RenderingControlService(ipAddress),
-                new ContentDirectoryService(ipAddress));
+                new ContentDirectoryService(ipAddress),
+                new ZoneGroupTopologyService(ipAddress));
         }
 
         private static void Print(string message)

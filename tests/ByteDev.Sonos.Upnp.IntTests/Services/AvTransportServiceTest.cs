@@ -15,6 +15,7 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
         private SonosController _sonosController;
         private RenderingControlService _renderingControlService;
         private ContentDirectoryService _contentDirectoryService;
+        private ZoneGroupTopologyService _zoneGroupTopologyService;
 
         [SetUp]
         public void SetUp()
@@ -23,10 +24,12 @@ namespace ByteDev.Sonos.Upnp.IntTests.Services
 
             _renderingControlService = new RenderingControlService(TestSpeaker.IpAddress);
             _contentDirectoryService = new ContentDirectoryService(TestSpeaker.IpAddress);
+            _zoneGroupTopologyService = new ZoneGroupTopologyService(TestSpeaker.IpAddress);
 
             _sonosController = new SonosController(_sut, 
                 _renderingControlService,
-                _contentDirectoryService);
+                _contentDirectoryService,
+                _zoneGroupTopologyService);
         }
 
         private async Task AssertIsPlayingAsync()
